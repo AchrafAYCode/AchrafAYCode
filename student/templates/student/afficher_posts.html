@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Afficher les posts</title>
+  </head>
+  <body>
+    <h1>Logements</h1>
+    <ul>
+      {% for logement in logements %}
+      <li>{{ logement }}</li>
+      {% endfor %}
+    </ul>
+
+    <h1>Stages</h1>
+    <ul>
+      {% for stage in stages %}
+      <li>{{ stage }}</li>
+      {% endfor %}
+    </ul>
+
+    <h1>Evénements</h1>
+    <ul>
+      {% for evenement in evenements %}
+      <li>{{ evenement }}</li>
+      {% endfor %}
+    </ul>
+
+    <h1>Evénements de club</h1>
+    <ul>
+      {% for evenement in evenements_club %}
+      <li>{{ evenement }}</li>
+      {% endfor %}
+    </ul>
+
+    <h1>Evénements sociaux</h1>
+    <ul>
+      {% for evenement in evenements_social %}
+      <li>{{ evenement }}</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

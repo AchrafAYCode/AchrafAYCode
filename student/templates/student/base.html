@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {% block styles %}
+  <style>
+    
+    .navbar {
+      background-color: #f8f9fa; 
+      padding: 20px; 
+      display: flex;
+      justify-content: space-between; 
+      align-items: center; 
+      
+    }
+    .navbar a {
+      color: #333;
+      text-decoration: none;
+      font-size: 15px; 
+      margin: 0 10px; 
+    }
+    
+  
+    .navbar h1 {
+      margin: 0; 
+    }
+
+   
+    .navbar a:hover {
+      color: #000; 
+    }
+
+    
+  </style>
+  
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a href="#" style="font-size: 25px ; font-family: 'Franklin Gothic Medium';"> <strong>Student Help</strong> </a>
+    <div>
+      <a href="#">About</a>
+      <a href="#">Products</a>
+      <a href="#">Services</a>
+      <a href="{% url 'logout' %}">LogOut</a>
+    </div>
+  </nav>
+  {% endblock %}  
+  <div >
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>
