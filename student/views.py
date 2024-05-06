@@ -6,32 +6,24 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.shortcuts import redirect   
 from django.contrib.auth.forms import UserCreationForm
-from .forms import LogementForm
+from .models import User 
 
-
-
-
-def index (request) :
-    context = {'form' : LogementForm()}
-    return render(request,'student/list.html',context)
-    
-    
-    
-    
-    
-    
-    
-def login(request) :
-    if request .method=="POST" :
-        form = AuthenticationForm(request .POST)
-        if form . is_valid() :
+def login(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request.POST)
+        if form.is_valid():
             user_email = form.cleaned_data['email']
-            logged_user = User.objects.get(courriel=user_email)
-            request.session['logged_user_id'] = logged_user.id
-            return redirect ('/home')
-        else:
-            form = AuthenticationForm()
-    return render('student/registration/acceuils.html ' , {'form' : form}) 
+            try:
+                logged_user = User.objects.get(email=user_email)
+                request.session['logged_user_id'] = logged_user.id
+                return redirect('/home')
+            except User.DoesNotExist:
+                messages.error(request, "L'utilisateur avec cet email n'existe pas.")
+                return redirect('login')
+    else:
+        form = AuthenticationForm()
+    
+    return render(request, 'student/registration/login.html', {'form': form})
 
 
 def register(request):
@@ -61,11 +53,10 @@ def loading_page(request):
 
 
 from django.shortcuts import render
-from .models import Logement, Stage, Evénement, EvenClub, EvenSocial
+from .models import Logement, Evénement, EvenClub, EvenSocial
 
 def afficher_posts(request):
     logements = Logement.objects.all()
-    stages = Stage.objects.all()
     evenements = Evénement.objects.all()
     evenements_club = EvenClub.objects.all()
     evenements_social = EvenSocial.objects.all()

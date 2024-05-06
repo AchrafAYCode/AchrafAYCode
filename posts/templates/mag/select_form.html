@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sélectionner un type de formulaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 400px;
+        }
+        li {
+            background-color: #fff;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        li a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+        }
+        li a:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sélectionner un type de post</h1>
+    <ul>
+        <li><a href="{% url 'creer_post' form_type='stage' %}">Formulaire de Stage</a></li>
+        <li><a href="{% url 'creer_post' form_type='transport' %}">Formulaire de Transport</a></li>
+        <li><a href="{% url 'creer_post' form_type='recommandation' %}">Formulaire de Recommandation</a></li>
+        <li><a href="{% url 'creer_post' form_type='logement' %}">Formulaire de Logement</a></li>
+        <li><a href="{% url 'creer_post' form_type='evenement_club' %}">Formulaire d'Événement Club</a></li>
+        <li><a href="{% url 'creer_post' form_type='evenement_social' %}">Formulaire d'Événement Social</a></li>
+    </ul>
+</body>
+</html>

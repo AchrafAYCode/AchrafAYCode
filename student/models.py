@@ -1,9 +1,10 @@
 from django.db import models 
 from django.utils import timezone
 from datetime import date
-from django import forms
+
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from posts.models import Poste
 
 class User(models.Model):
     nom = models.CharField(max_length=30)
@@ -15,15 +16,6 @@ class User(models.Model):
         return self.nom + ' ' + self.prenom + ' ' + self.téléphone + ' ' + self.email 
 
 
-class Poste(models.Model): 
-    TYPE_CHOICES = [('0', 'offre'), ('1', 'demande')]
-    type = models.CharField(max_length=1, choices=TYPE_CHOICES)
-    date = models.DateField(null=True, default=date.today)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    image = models.ImageField(blank=True)
-
-    def __str__(self):
-        return self.get_type_display() + ' - ' + str(self.date)
 
 class Réaction(models.Model):
     comment = models.TextField() 
@@ -58,17 +50,6 @@ class Logement(Poste):
     def __str__(self):
         return 'Logement - ' + self.localisation
 
-class Stage(Poste):
-    TYPE_CHOICES = [('1', 'ouvrier'), ('2', 'technicien'), ('3', 'pfe')]
-    typeStg = models.CharField(max_length=1, choices=TYPE_CHOICES)
-    société = models.CharField(max_length=50) 
-    durée = models.IntegerField()
-    sujet = models.CharField(max_length=50)
-    contactinfo = models.CharField(max_length=50)
-    spécialite = models.CharField(max_length=255, choices=TYPE_CHOICES, default='')
-
-    def __str__(self): 
-        return 'Stage - ' + self.société + ' - ' + self.sujet
 
 class Evénement(Poste):
     intitulé = models.CharField(max_length=50)
