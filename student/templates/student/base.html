@@ -8,18 +8,19 @@
     <style>
       body {
         background: hsl(0, 0%, 0%);
-        color: hsl(0 0% 98%);
+        color: hsl(0, 0%, 0%);
         font-family: "Geist Sans", "SF Pro Text", "SF Pro Icons", "AOS Icons",
           "Helvetica Neue", Helvetica, Arial, sans-serif, system-ui;
         margin: 0;
       }
 
       body::before {
-        --line: hsl(0 0% 95% / 0.25);
+        --line: hsla(0, 0%, 100%, 0.25);
         content: "";
-        height: 100vh;
-        width: 100vw;
+        height: 100%;
+        width: 100%;
         position: fixed;
+        z-index: -1; /* Assurez-vous qu'il se trouve en arrière-plan */
         background: linear-gradient(
               90deg,
               var(--line) 1px,
@@ -28,23 +29,23 @@
             0 -5vmin / 10vmin 10vmin,
           linear-gradient(var(--line) 1px, transparent 1px 10vmin) 0 -5vmin / 10vmin
             10vmin;
-        mask: linear-gradient(-15deg, transparent 30%, white);
+        mask: linear-gradient(-15deg, transparent 30%, rgb(0, 0, 0));
       }
 
       .navbar {
-        background-color: #f8f9fa;
+        background-color: #000000;
         padding: 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        position:fixed;
+        position: fixed;
         top: 0; /* La navbar sera positionnée au-dessus de la page */
         left: 0; /* La navbar sera alignée à gauche de la page */
         right: 0;
         z-index: 1000;
       }
       .navbar a {
-        color: #333;
+        color: #ffffff;
         text-decoration: none;
         font-size: 15px;
         margin: 0 10px;
@@ -55,7 +56,7 @@
       }
 
       .navbar a:hover {
-        color: #000;
+        color: #ffffff;
       }
     </style>
   </head>

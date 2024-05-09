@@ -41,30 +41,3 @@ def register(request):
         form = UserCreationForm()
     
     return render(request, "student/registration/register.html", {"form": form})
-
- 
-def logout_view(request):
-    logout(request)
-
-
-def loading_page(request):
-    return render(request, 'loading.html') 
-
-
-
-from django.shortcuts import render
-from .models import Logement, Evénement, EvenClub, EvenSocial
-
-def afficher_posts(request):
-    logements = Logement.objects.all()
-    evenements = Evénement.objects.all()
-    evenements_club = EvenClub.objects.all()
-    evenements_social = EvenSocial.objects.all()
-
-    return render(request, 'afficher_posts.html', {
-        'logements': logements,
-        'stages': stages,
-        'evenements': evenements,
-        'evenements_club': evenements_club,
-        'evenements_social': evenements_social,
-    })

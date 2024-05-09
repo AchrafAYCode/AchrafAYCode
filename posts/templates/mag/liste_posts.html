@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Afficher les Postes</title>
+    <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=pt_774bf810863bba2e5c7da24f2dfed3"></script>
+
     {% extends "student/base.html" %} {% block content %}
     <style>
       /* Styles CSS */
@@ -24,7 +26,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: rgb(0, 0, 0);
       }
 
       .post-container {
@@ -43,7 +44,7 @@
         border-radius: 10px;
         padding: 16px 16px 0;
         margin-bottom: 16px;
-      } 
+      }
 
       .post-img {
         max-width: 550px;
@@ -67,13 +68,26 @@
         cursor: default;
       }
 
-      .post-name {
-        font-size: 1.1rem;
-        font-weight: 600;
-        margin-bottom: 8px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+      .post-body-ajout a {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--clr-text);
+        background: rgb(60, 59, 59); /* Ajoutez une couleur d'arrière-plan */
+        box-shadow: 4px 4px 30px rgb(0, 0, 0);
+        border-radius: 10px;
+        padding: 16px 16px 0;
+        margin-bottom: 16px;
+        font-size: "30px";
+        height: auto;
+        width: 600px;
+        color: white;
+        text-decoration: none;
+        display: flex; /* Modification du display en flex */
+        flex-direction: column; /* Ajout d'une direction de colonne */
+        align-items: center;
+        gap: 8px;
+        padding: 15px 0;
+
       }
 
       .post-username {
@@ -91,10 +105,45 @@
         height: 40px;
         border-radius: 50%;
       }
+
+      .post-name {
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 2px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .post-author {
+        width: fit-content;
+        font-size: 0.8rem;
+        font-weight: 600;
+        opacity: 0.6;
+        color: var(--clr-text);
+      }
+
+      .post-avatar {
+        width: 40px;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .like {
+        color: white;
+      }
     </style>
   </head>
   <body>
-    <br><br><br><br><br>
+    <br /><br /><br /><br /><br />
+
+    <div class="posts">
+        <div class="post-body-ajout">
+          <a href="{% url 'select_form' %}"> Ajouter une poste</a>
+        </div>
+    </div>
+
     <div class="posts">
       <div class="post-container">
         {% for poste in posts %}
@@ -103,47 +152,62 @@
             <div class="post-detail">
               <img class="post-img" src="/media/{{poste.image}}" alt="recipe" />
               <h2 class="post-name">{{ poste.title }}</h2>
-              <h2>{{ poste }}</h2>
               {% if poste.type == '0' %}
-              <p>Offre de</p>
+              <h2>
+                Offre de {% if poste.stage %}Stage{% elif poste.logement%}Logement{% elif poste.transport %}Transport{% elif poste.recommandation %}Recommandation{% elif poste.evenement%}Événement{% endif %}
+              </h2>
               {% elif poste.type == '1' %}
-              <p>Demande de</p>
+              <h2>
+                Demande de {% if poste.stage %}Stage{% elif poste.logement%}Logement{% elif poste.transport %}Transport{% elif poste.recommandation %}Recommandation{% elif poste.evenement %}Événement{% endif %}
+              </h2>
               {% endif %} {% if poste.logement %}
-              <h3>Logement</h3>
-              <p>Localisation: {{ poste.logement.localisation }}</p>
-              <p>Description: {{ poste.logement.description }}</p>
-              <p>Contact: {{ poste.logement.contactinfo }}</p>
+
+              <div>
+                <strong>Localisation:</strong> {{poste.logement.localisation}}<br />
+                <strong>Description:</strong> {{ poste.logement.description}}<br />
+                <strong>Contact:</strong> {{ poste.logement.contactinfo }}<br />
+              </div>
               {% elif poste.transport %}
-              <h3>Transport</h3>
-              <p>Départ: {{ poste.transport.depart }}</p>
-              <p>Destination: {{ poste.transport.destination }}</p>
-              <p>Heure de départ: {{ poste.transport.heure_dep }}</p>
-              <p>Nombre de sièges: {{ poste.transport.nbre_sièges }}</p>
-              <p>Contact: {{ poste.transport.contactinfo }}</p>
+
+              <div>
+                <strong>Départ:</strong> {{ poste.transport.depart }}<br />
+                <strong>Destination:</strong> {{poste.transport.destination}}<br />
+                <strong>Heure de départ:</strong> {{poste.transport.heure_dep}}<br />
+                <strong>Nombre de sièges:</strong> {{poste.transport.nbre_sièges}}<br />
+                <strong>Contact:</strong> {{ poste.transport.contactinfo }}<br />
+              </div>
               {% elif poste.stage %}
-              <h3>Stage</h3>
-              <p>Société: {{ poste.stage.société }}</p>
-              <p>Durée: {{ poste.stage.durée }}</p>
-              <p>Sujet: {{ poste.stage.sujet }}</p>
-              <p>Contact: {{ poste.stage.contactinfo }}</p>
-              <p>Spécialité: {{ poste.stage.spécialite }}</p>
+
+              <div>
+                <strong>Société:</strong> {{ poste.stage.société }}<br />
+                <strong>Durée:</strong> {{ poste.stage.durée }}<br />
+                <strong>Sujet:</strong> {{ poste.stage.sujet }}<br />
+                <strong>Contact:</strong> {{ poste.stage.contactinfo }}<br />
+                <strong>Spécialité:</strong> {{ poste.stage.spécialite }}<br />
+              </div>
               {% elif poste.recommandation %}
-              <h3>Recommandation</h3>
-              <p>Texte: {{ poste.recommandation.text }}</p>
+
+              <div>
+                <strong>Texte:</strong> {{ poste.recommandation.text }}<br />
+              </div>
               {% elif poste.evenement %} {% if poste.evenement.evenclub %}
-              <h3>Événement Club</h3>
-              <p>Club: {{ poste.evenement.evenclub.club }}</p>
-              <p>Intitulé: {{ poste.evenement.intitulé }}</p>
-              <p>Description: {{ poste.evenement.description }}</p>
-              <p>Lieu: {{ poste.evenement.lieu }}</p>
-              <p>Contact: {{ poste.evenement.contactInfo }}</p>
+
+              <div>
+                <strong>Club:</strong> {{ poste.evenement.evenclub.club }}<br />
+                <strong>Intitulé:</strong> {{ poste.evenement.intitulé }}<br />
+                <strong>Description:</strong> {{poste.evenement.description}}<br />
+                <strong>Lieu:</strong> {{ poste.evenement.lieu }}<br />
+                <strong>Contact:</strong> {{ poste.evenement.contactInfo }}<br />
+              </div>
               {% elif poste.evenement.evensocial %}
-              <h3>Événement Social</h3>
-              <p>Intitulé: {{ poste.evenement.intitulé }}</p>
-              <p>Description: {{ poste.evenement.description }}</p>
-              <p>Lieu: {{ poste.evenement.lieu }}</p>
-              <p>Contact: {{ poste.evenement.contactInfo }}</p>
-              <p>Prix: {{ poste.evenement.evensocial.prix }}</p>
+
+              <div>
+                <strong>Intitulé:</strong> {{ poste.evenement.intitulé }}<br />
+                <strong>Description:</strong> {{poste.evenement.description}}<br />
+                <strong>Lieu:</strong> {{ poste.evenement.lieu }}<br />
+                <strong>Contact:</strong> {{ poste.evenement.contactInfo }}<br />
+                <strong>Prix:</strong> {{ poste.evenement.evensocial.prix }}<br />
+              </div>
               {% endif %} {% endif %}
 
               <br /><br />
@@ -153,10 +217,16 @@
                   class="post-avatar"
                   src="https://img.freepik.com/vecteurs-premium/illustration-vectorielle-plate-echelle-gris-avatar-profil-utilisateur-icone-personne-image-profil-silhouette-neutre-genre-convient-pour-profils-medias-sociaux-icones-economiseurs-ecran-comme-modelex9xa_719432-879.jpg"
                 />
-                <div class="post-username">
-                  <h2 class="post-name">Homemade Ice Cream</h2>
+                <div class="post-details">
+                  <h2 class="post-name">{{poste.title}}</h2>
                   <p class="post-author">Posted By : {{poste.user}}</p>
                 </div>
+                <div
+                  data-lyket-type="like"
+                  data-lyket-id="{{ poste.id }}"
+                  data-lyket-namespace="blog"
+                  data-lyket-template="twitter"
+                ></div>
               </div>
             </div>
           </div>
