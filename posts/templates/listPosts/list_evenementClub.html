@@ -158,8 +158,11 @@
                 <td>{{ poste.evénement.evenclub.club }}</td>
                 <td>{{ poste.evénement.contactInfo }}</td>
                 <td>
-                  <button class="button-24" role="button">Supprimer</button>
-                </td>
+                  <form action="{% url 'supprimer_EvC' poste_id=poste.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="button-24" type="submit">Supprimer</button>
+                  </form>
+              </td>
               </tr>
               {% endif %} {% endfor %} {% endif %}
             </tbody>

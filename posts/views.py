@@ -2,10 +2,11 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import View
 from django.urls import reverse_lazy
-from .models import Poste
+from .models import Poste ,Stage
+from student.models import Recommandation,Transport  ,EvenSocial 
 from django.views.generic import ListView , CreateView ,UpdateView
 from .forms import  StageForm , RecommandationForm , TransportForm ,LogementForm,EvenClub,EvenSocialForm ,EvenClubForm
-
+from django.shortcuts import redirect, get_object_or_404
 
 
 class ListePost(ListView):
@@ -103,9 +104,83 @@ class ListEvenementSocial(ListView):
     
 
     
-class ModifierPost(UpdateView):
-    model = Poste
+class ModifieStage(UpdateView):
+    model = Stage
     template_name = 'modifPosts/modif_stage.html'
     form_class = StageForm
     context_object_name = 'modif_stage' 
+
+
+class ModifierLogement(UpdateView):
+    model = Poste
+    template_name = 'modifPosts/modif_Logement.html'
+    form_class = LogementForm
+    context_object_name = 'modif_Logement' 
+
+class ModifierRec(UpdateView):
+    model = Recommandation
+    template_name = 'modifPosts/modif_Rec.html'
+    form_class = RecommandationForm
+    context_object_name = 'modif_Rec' 
+
+class ModifierTransport(UpdateView):
+    model = Transport
+    template_name = 'modifPosts/modif_Transport.html'
+    form_class = TransportForm
+    context_object_name = 'modif_Transport' 
+
+class ModifierEvC(UpdateView):
+    model = EvenClub
+    template_name = 'modifPosts/modif_EvC.html'
+    form_class = EvenClubForm
+    context_object_name = 'modif_EvC' 
+
+class ModifierEvS(UpdateView):
+    model = EvenSocial
+    template_name = 'modifPosts/modif_EvS.html'
+    form_class = EvenClubForm
+    context_object_name = 'modif_EvS'
+    
+
+
+
+
+def supprimer_Stage(request, poste_id):
+    if request.method == 'POST':
+        poste = get_object_or_404(Poste, id=poste_id)
+        poste.delete()
+        return redirect('liststage')
+    
+
+def supprimer_Logement(request, poste_id):
+    if request.method == 'POST':
+        poste = get_object_or_404(Poste, id=poste_id)
+        poste.delete()
+        return redirect('listLog')
+   
+def supprimer_Rec(request, poste_id):
+    if request.method == 'POST':
+        poste = get_object_or_404(Poste, id=poste_id)
+        poste.delete()
+        return redirect('listRecommandation')
+   
+     
+def supprimer_Transport(request, poste_id):
+    if request.method == 'POST':
+        poste = get_object_or_404(Poste, id=poste_id)
+        poste.delete()
+        return redirect('listTransport')
+  
+
+def supprimer_EvS(request, poste_id):
+    if request.method == 'POST':
+        poste = get_object_or_404(Poste, id=poste_id)
+        poste.delete()
+        return redirect('listEvenS')
+   
+def supprimer_EvC(request, poste_id):
+    if request.method == 'POST':
+        poste = get_object_or_404(Poste, id=poste_id)
+        poste.delete()
+        return redirect('listEvenC')
     

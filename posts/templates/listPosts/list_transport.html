@@ -127,12 +127,12 @@
         .button-24:active {
             opacity: 0.5;
         }
-    </style>
+    </style>    
 </head>
 <body>
     <div class="content">
         <div class="container">
-            <h2 class="mb-5" style="text-align: center;">Liste de stages</h2>
+            <h2 class="mb-5" style="text-align: center;">Liste de trasports</h2>
             <div class="table-responsive custom-table-responsive">
                 <table class="table custom-table">
                     <thead>
@@ -158,8 +158,15 @@
                                       <td>{{ poste.transport.nbre_sièges }}</td>  
                                       <td>{{ poste.transport.contactinfo }}</td>
                                       <td>
-                                          <button class="button-24" role="button">Supprimer</button>
-                                      </td>
+                                        {% if user.is_authenticated and user.is_staff %}
+                                        <form action="{% url 'supprimer_Transport' poste_id=poste.id %}" method="post">
+                                          {% csrf_token %}
+                                          <input type="hidden" name="liste_id" value="{{ liste.id }}">
+                                          <button class="button-24" type="submit">Supprimer</button>
+                                        </form>
+                                        
+                                        {% endif %}
+                                    </td>
                                   </tr>
                               {% endif %}
                           {% endfor %}

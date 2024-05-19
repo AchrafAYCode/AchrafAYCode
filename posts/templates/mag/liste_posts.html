@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Afficher les Postes</title>
-    
+
     <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=pt_774bf810863bba2e5c7da24f2dfed3"></script>
     {% extends "student/base.html" %} {% block content %}
-    
-    <style>
 
+    <style>
       @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&family=Roboto:wght@500;700&display=swap");
 
       :root {
@@ -74,15 +72,15 @@
         font-size: 15px;
         font-weight: 500;
         color: var(--clr-text);
-        background: rgb(60, 59, 59); 
+        background: rgb(60, 59, 59);
         box-shadow: 4px 4px 30px rgb(0, 0, 0);
         border-radius: 10px;
         padding: 16px 16px 0;
         font-size: "30px";
         height: auto;
         width: 600px;
-        display: flex; 
-        flex-direction: column; 
+        display: flex;
+        flex-direction: column;
         align-items: center;
         padding: 15px 0;
       }
@@ -92,8 +90,6 @@
         align-items: center;
         gap: 10px;
       }
-
-      
 
       .post-avatar {
         width: 40px;
@@ -110,13 +106,12 @@
         white-space: nowrap;
       }
 
-      .post-author {  
+      .post-author {
         width: fit-content;
         font-size: 17px;
         font-weight: 600;
         color: var(--clr-text);
       }
-
 
       .post-avatar {
         width: 40px;
@@ -125,7 +120,7 @@
         border-radius: 5px;
         cursor: pointer;
       }
-      
+
       .overlay {
         position: fixed;
         top: 0;
@@ -210,37 +205,35 @@
       .post-body-ajout {
         text-align: center; /* Centrer le bouton horizontalement */
         margin-top: 60px; /* Espacement du haut */
-    }
+      }
 
-    .post-body-ajout button {
+      .post-body-ajout button {
         padding: 10px 20px; /* Espacement intérieur du bouton */
-        background-color: #4CAF50; /* Couleur de fond du bouton */
+        background-color: #4caf50; /* Couleur de fond du bouton */
         color: white; /* Couleur du texte */
         border: none; /* Enlever la bordure */
         border-radius: 5px; /* Bord arrondi */
         cursor: pointer; /* Curseur pointeur */
-    }
+      }
 
-    .post-details a{
-      text-decoration: none;
+      .post-details a {
+        text-decoration: none;
+      }
+      .post-details p:hover {
+        text-decoration: white;
+        color: white;
+      }
 
-    }
-    .post-details p:hover{
-      text-decoration: white;
-      color: white;
-    }
-
-    .commentaire{
-      padding-left: 10px;
-      height: auto;
-      min-width: 580px;
-      max-width: 580px;
-      border-radius: 10px;
-      border-color: rgba(147, 146, 146, 0.652);
-      background-color: transparent ;
-     text-decoration: white;
-
-    }
+      .commentaire {
+        padding-left: 10px;
+        height: auto;
+        min-width: 580px;
+        max-width: 580px;
+        border-radius: 10px;
+        border-color: rgba(147, 146, 146, 0.652);
+        background-color: transparent;
+        text-decoration: white;
+      }
     </style>
     <script>
       // Fonction pour afficher le pop-up
@@ -252,6 +245,7 @@
       function closePopup() {
         document.getElementById("overlay").style.display = "none";
       }
+      
     </script>
   </head>
   <body>
@@ -291,14 +285,16 @@
               >
             </li>
             <li>
-              <a href="{% url 'creer_post' form_type='evenement_social' %}">Formulaire d'Événement Social</a>
+              <a href="{% url 'creer_post' form_type='evenement_social' %}"
+                >Formulaire d'Événement Social</a
+              >
             </li>
           </ul>
           <button onclick="closePopup()">Fermer</button>
         </div>
       </div>
     </div>
-    
+
     <div class="posts">
       <div class="post-container">
         {% for poste in posts %}
@@ -326,22 +322,18 @@
                 <strong>Contact:</strong> {{ poste.logement.contactinfo }}<br />
               </div>
               {% elif poste.transport %}
-
               <div>
                 <strong>Départ:</strong> {{ poste.transport.depart }}<br />
-                <strong>Destination:</strong>
-                {{poste.transport.destination}}<br />
-                <strong>Heure de départ:</strong>
-                {{poste.transport.heure_dep}}<br />
-                <strong>Nombre de sièges:</strong>
-                {{poste.transport.nbre_sièges}}<br />
+                <strong>Destination:</strong>{{poste.transport.destination}}<br />
+                <strong>Heure de départ:</strong>{{poste.transport.heure_dep}}<br />
+                <strong>Nombre de sièges:</strong>{{poste.transport.nbre_sièges}}<br />
                 <strong>Contact:</strong> {{ poste.transport.contactinfo }}<br />
               </div>
               {% elif poste.stage %}
 
               <div>
                 <strong>Société:</strong> {{ poste.stage.société }}<br />
-                <strong>Durée:</strong> {{ poste.stage.durée }}<br />
+                <strong>Durée:</strong> {{ poste.stage.durée }} Mois<br />
                 <strong>Sujet:</strong> {{ poste.stage.sujet }}<br />
                 <strong>Contact:</strong> {{ poste.stage.contactinfo }}<br />
                 <strong>Spécialité:</strong> {{ poste.stage.spécialite }}<br />
@@ -356,8 +348,7 @@
               <div>
                 <strong>Club:</strong> {{ poste.evénement.evenclub.club }}<br />
                 <strong>Intitulé:</strong> {{ poste.evénement.intitulé }}<br />
-                <strong>Description:</strong>
-                {{poste.evénement.description}}<br />
+                <strong>Description:</strong>{{poste.evénement.description}}<br />
                 <strong>Lieu:</strong> {{ poste.evénement.lieu }}<br />
                 <strong>Contact:</strong> {{ poste.evénement.contactInfo }}<br />
               </div>
@@ -365,8 +356,7 @@
 
               <div>
                 <strong>Intitulé:</strong> {{ poste.evénement.intitulé }}<br />
-                <strong>Description:</strong>
-                {{poste.evénement.description}}<br />
+                <strong>Description:</strong>{{poste.evénement.description}}<br />
                 <strong>Lieu:</strong> {{ poste.evénement.lieu }}<br />
                 <strong>Contact:</strong> {{ poste.evénement.contactInfo }}<br />
                 <strong>Prix:</strong> {{ poste.evénement.evensocial.prix }}<br />
@@ -381,7 +371,7 @@
                   src="https://img.freepik.com/vecteurs-premium/illustration-vectorielle-plate-echelle-gris-avatar-profil-utilisateur-icone-personne-image-profil-silhouette-neutre-genre-convient-pour-profils-medias-sociaux-icones-economiseurs-ecran-comme-modelex9xa_719432-879.jpg"
                 />
                 <div class="post-details">
-                  <a href="{% url 'user_profile' user_id=poste.user.id %}"
+                  <a href="{% url 'user_profil' user_id=poste.user.id %}"
                     ><p class="post-author">Posted By : {{poste.user}}</p></a
                   >
                 </div>
@@ -395,8 +385,15 @@
             </div>
           </div>
 
-          <div >
-            <textarea class="commentaire" placeholder="Leave a comment here" ></textarea>
+          <div>
+            <textarea
+              class="commentaire"
+              id="commentaire-{{ poste.id }}"
+              placeholder="Leave a comment here"
+              
+            ></textarea>
+           
+           
           </div>
         </div>
         {% endfor %}

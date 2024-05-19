@@ -149,7 +149,11 @@
                                         <td>{{ poste.user }}</td>
                                         <td>{{ poste.recommandation.text }}</td>
                                         <td>
-                                            <button class="button-24" role="button">Supprimer</button>
+                                            <form action="{% url 'supprimer_Rec' poste_id=poste.id %}" method="post">
+                                              {% csrf_token %}
+                                              <button class="button-24" type="submit">Supprimer</button>
+                                            </form>
+                                            
                                         </td>
                                     </tr>
                                 {% endif %}

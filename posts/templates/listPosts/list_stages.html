@@ -166,7 +166,14 @@
                                         <td>{{ poste.stage.durée }} Mois</td>
                                         <td>{{ poste.stage.contactinfo }}</td>
                                         <td>
-                                            <button class="button-24" role="button">Supprimer</button>
+                                            {% if user.is_authenticated and user.is_staff %}
+                                            <form action="{% url 'supprimer_Stage' poste_id=poste.id %}" method="post">
+                                              {% csrf_token %}
+                                              <input type="hidden" name="liste_id" value="{{ liste.id }}">
+                                              <button class="button-24" type="submit">Supprimer</button>
+                                            </form>
+                                            
+                                            {% endif %}
                                         </td>
                                     </tr>
                                 {% endif %}

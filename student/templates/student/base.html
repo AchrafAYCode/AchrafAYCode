@@ -95,13 +95,30 @@
       .dropdown:hover .dropdown-content {
         display: block;
       }
+
+      button {
+            background: none;
+            border: none;
+            padding: 0;
+            font: inherit;
+            color: inherit;
+            cursor: pointer;
+        }
     </style>
   </head>
   <body>
     <div class="navbar">
       <a href="#"><strong> Student Help</strong></a>
       <a href="{% url 'liste_posts' %}">Home</a>
-      <a href="#news">Profile </a>
+      <a href="{% url 'user_profil' user_id=user.id %}"> profil</a>
+      <a href="{% url 'logout' %}">
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Déconnexion</button>
+        </form>
+  
+      </a>
+
       {% if user.is_authenticated and user.is_superuser %}
       <div class="dropdown">
         <button class="dropbtn">

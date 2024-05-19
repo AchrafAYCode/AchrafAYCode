@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Supprimer le Post : {{ Post.nom }}</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: "Arial", sans-serif;
+        background-color: #f0f0f0; /* Optionnel: couleur de fond douce */
+      }
+      .message-container {
+        text-align: center;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+      .btn-danger {
+        color: white;
+        background-color: red;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        display: inline-block;
+        transition: background-color 0.3s;
+      }
+      .btn-danger:hover {
+        background-color: darkred;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container message-container">
+      <h1 class="display-4">
+        Êtes-vous sûr de vouloir supprimer cet post 
+      </h1>
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Oui, supprimer</button>
+      </form>
+    </div>
+  </body>
+</html>
