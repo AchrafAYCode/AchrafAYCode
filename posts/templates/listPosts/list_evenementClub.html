@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="fonts/icomoon/style.css" />
     <link rel="stylesheet" href="css/owl.carousel.min.css" />
     {% extends "student/base.html" %}
-    {% block content %}
+     {% block content %}
     <style>
         /* Your CSS styles here */
         p {
@@ -26,8 +26,7 @@
             color: #fff;
         }
         .custom-table {
-            height: 600px;
-            width: 1000px;
+            width: 100%;
         }
         .custom-table thead tr, .custom-table thead th {
             border-top: none;
@@ -49,19 +48,14 @@
         .custom-table tbody tr:not(.spacer) {
             border-radius: 7px;
             overflow: hidden;
-            -webkit-transition: 0.3s all ease;
-            -o-transition: 0.3s all ease;
             transition: 0.3s all ease;
         }
         .custom-table tbody tr:not(.spacer):hover {
-            -webkit-box-shadow: 0 2px 10px -5px rgba(0, 0, 0, 0.1);
             box-shadow: 0 2px 10px -5px rgba(0, 0, 0, 0.1);
         }
         .custom-table tbody tr th, .custom-table tbody tr td {
             background: #25252b;
             border: none;
-            -webkit-transition: 0.3s all ease;
-            -o-transition: 0.3s all ease;
             transition: 0.3s all ease;
         }
         .custom-table tbody tr th a, .custom-table tbody tr td a {
@@ -133,43 +127,46 @@
             opacity: 0.5;
         }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="content">
-        <div class="container">
-            <h2 class="mb-5" style="text-align: center;">Liste de stages</h2>
-            <div class="table-responsive custom-table-responsive">
-                <table class="table custom-table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Utilisateur</th>
-                            <th scope="col">Intitulé</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Lieu</th>
-                            <th scope="col">Club</th>
-                            <th scope="col">Contact</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for poste in list_evenementClub %}
-                        <tr scope="row">
-                            <td>{{ poste.user.username }}</td>
-                            <td>{{ poste.evenclub.Intitulé }}</td>
-                            <td>{{ poste.evenclub.Description }}</td>
-                            <td>{{ poste.evenclub.Lieu }}</td>
-                            <td>{{ poste.evenclub.Club }}</td>
-                            <td>{{ poste.evenclub.contactinfo }}</td>
-                            <td>
-                                <button class="button-24" role="button">Supprimer</button>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+      <div class="container">
+        <h2 class="mb-5" style="text-align: center">
+          Liste des événements de club
+        </h2>
+        <div class="table-responsive custom-table-responsive">
+          <table class="table custom-table">
+            <thead>
+              <tr>
+                <th scope="col">Utilisateur</th>
+                <th scope="col">Intitulé</th>
+                <th scope="col">Description</th>
+                <th scope="col">Lieu</th>
+                <th scope="col">Club</th>
+                <th scope="col">Contact</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if list_evenementClub %} {% for poste in list_evenementClub %}
+              {% if poste.evénement.evenclub %}
+              <tr scope="row">
+                <td>{{ poste.user }}</td>
+                <td>{{ poste.evénement.intitulé }}</td>
+                <td>{{ poste.evénement.description }}</td>
+                <td>{{ poste.evénement.lieu }}</td>
+                <td>{{ poste.evénement.evenclub.club }}</td>
+                <td>{{ poste.evénement.contactInfo }}</td>
+                <td>
+                  <button class="button-24" role="button">Supprimer</button>
+                </td>
+              </tr>
+              {% endif %} {% endfor %} {% endif %}
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
     {% endblock %}
-</body>
+  </body>
 </html>

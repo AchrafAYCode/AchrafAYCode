@@ -102,7 +102,7 @@ class ListEvenementSocial(ListView):
     context_object_name = 'list_evenementSocial' 
     
 
-
+    
 class ModifierPost(UpdateView):
     model = Poste
     template_name = 'modifPosts/modif_stage.html'
