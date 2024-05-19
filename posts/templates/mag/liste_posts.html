@@ -305,15 +305,17 @@
         <div class="post">
           <div class="post-body">
             <div class="post-detail">
+              {% if poste.image %}
               <img class="post-img" src="/media/{{poste.image}}" alt="recipe" />
+              {% endif %}
               <h2 class="post-name">{{ poste.title }}</h2>
               {% if poste.type == '0' %}
               <h2>
-                Offre de {% if poste.stage %}Stage{% elif poste.logement%}Logement{% elif poste.transport %}Transport{% elif poste.recommandation %}Recommandation{% elif poste.evenement%}Événement{% endif %}
+                Offre de {% if poste.stage %}Stage{% elif poste.logement%}Logement{% elif poste.transport %}Transport{% elif poste.recommandation %}Recommandation{% elif poste.evénement%}Événement{% endif %}
               </h2>
               {% elif poste.type == '1' %}
               <h2>
-                Demande de {% if poste.stage %}Stage{% elif poste.logement%}Logement{% elif poste.transport %}Transport{% elif poste.recommandation %}Recommandation{% elif poste.evenement %}Événement{% endif %}
+                Demande de {% if poste.stage %}Stage{% elif poste.logement%}Logement{% elif poste.transport %}Transport{% elif poste.recommandation %}Recommandation{% elif poste.evénement %}Événement{% endif %}
               </h2>
               {% endif %} {% if poste.logement %}
 
@@ -349,25 +351,25 @@
               <div>
                 <strong>Texte:</strong> {{ poste.recommandation.text }}<br />
               </div>
-              {% elif poste.evenement %} {% if poste.evenement.evenclub %}
+              {% elif poste.evénement %} {% if poste.evénement.evenclub %}
 
               <div>
-                <strong>Club:</strong> {{ poste.evenement.evenclub.club }}<br />
-                <strong>Intitulé:</strong> {{ poste.evenement.intitulé }}<br />
+                <strong>Club:</strong> {{ poste.evénement.evenclub.club }}<br />
+                <strong>Intitulé:</strong> {{ poste.evénement.intitulé }}<br />
                 <strong>Description:</strong>
-                {{poste.evenement.description}}<br />
-                <strong>Lieu:</strong> {{ poste.evenement.lieu }}<br />
-                <strong>Contact:</strong> {{ poste.evenement.contactInfo }}<br />
+                {{poste.evénement.description}}<br />
+                <strong>Lieu:</strong> {{ poste.evénement.lieu }}<br />
+                <strong>Contact:</strong> {{ poste.evénement.contactInfo }}<br />
               </div>
-              {% elif poste.evenement.evensocial %}
+              {% elif poste.evénement.evensocial %}
 
               <div>
-                <strong>Intitulé:</strong> {{ poste.evenement.intitulé }}<br />
+                <strong>Intitulé:</strong> {{ poste.evénement.intitulé }}<br />
                 <strong>Description:</strong>
-                {{poste.evenement.description}}<br />
-                <strong>Lieu:</strong> {{ poste.evenement.lieu }}<br />
-                <strong>Contact:</strong> {{ poste.evenement.contactInfo }}<br />
-                <strong>Prix:</strong> {{ poste.evenement.evensocial.prix }}<br />
+                {{poste.evénement.description}}<br />
+                <strong>Lieu:</strong> {{ poste.evénement.lieu }}<br />
+                <strong>Contact:</strong> {{ poste.evénement.contactInfo }}<br />
+                <strong>Prix:</strong> {{ poste.evénement.evensocial.prix }}<br />
               </div>
               {% endif %} {% endif %}
 

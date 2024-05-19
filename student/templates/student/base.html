@@ -100,7 +100,7 @@
   <body>
     <div class="navbar">
       <a href="#"><strong> Student Help</strong></a>
-      <a href="#home">Home</a>
+      <a href="{% url 'liste_posts' %}">Home</a>
       <a href="#news">Profile </a>
       {% if user.is_authenticated and user.is_superuser %}
       <div class="dropdown">
