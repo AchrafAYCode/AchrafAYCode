@@ -73,6 +73,9 @@ class EvenSocial(Evénement):
         return self.intitulé + ' - ' + str(self.prix)
 
 
+
+
+
 # Create your models here.
 
 

@@ -4,7 +4,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% block styles %}
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <style>
       body {
         background: hsl(0, 0%, 0%);
@@ -33,50 +36,91 @@
       }
 
       .navbar {
-        background-color: #000000;
-        padding: 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: fixed;
-        top: 0; /* La navbar sera positionnée au-dessus de la page */
-        left: 0; /* La navbar sera alignée à gauche de la page */
-        right: 0;
-        z-index: 1000;
-      }
-      .navbar a {
-        color: #ffffff;
-        text-decoration: none;
-        font-size: 15px;
-        margin: 0 10px;
+        
+        overflow: hidden;
+        background-color: #ffffff;
       }
 
-      .navbar h1 {
+      .navbar a {
+        float: left;
+        font-size: 18px;
+        color: rgb(0, 0, 0);
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+
+      .dropdown {
+        float: left;
+        overflow: hidden;
+      }
+
+      .dropdown .dropbtn {
+        font-size: 16px;
+        border: none;
+        outline: none;
+        color: rgb(0, 0, 0);
+        padding: 14px 16px;
+        background-color: inherit;
+        font-family: inherit;
         margin: 0;
       }
 
-      .navbar a:hover {
-        color: #ffffff;
+      .navbar a:hover,
+      .dropdown:hover .dropbtn {
+        background-color: red;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+
+      .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+      }
+
+      .dropdown-content a:hover {
+        background-color: #ddd;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
       }
     </style>
   </head>
+  <body >
+    <div class="navbar">
+      <a href="#"><strong> Student Help</strong></a>
+      <a href="#home">Home</a>
+      <a href="#news">Profile </a>
+      <div class="dropdown">
+        <button class="dropbtn">
+          Administrateur 
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="{% url 'liststage' %}">Liste stages</a>
+          <a href="#">Liste trasports</a>
+          <a href="#">Liste logements</a>
+          <a href="#">Liste evenement Clubs</a>
+          <a href="#">Liste evenement Socials</a>
+          <a href="#">Liste recommandations</a>
 
-  <body>
-    <nav class="navbar">
-      <a
-        href="#"
-        style="font-size: 25px; font-family: 'Franklin Gothic Medium'"
-      >
-        <strong>Student Help</strong>
-      </a>
-      <div>
-        <a href="#">About</a>
-        <a href="#">Products</a>
-        <a href="#">Services</a>
-        <a href="{% url 'logout' %}">LogOut</a>
+        </div>
       </div>
-    </nav>
-    {% endblock %}
-    <div>{% block content %}{% endblock %}</div>
+    </div>
+    <div >
+      {% block content %}{% endblock %}
+  </div>
   </body>
 </html>

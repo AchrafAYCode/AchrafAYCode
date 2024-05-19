@@ -40,4 +40,10 @@ def register(request):
     else:
         form = UserCreationForm()
     
-    return render(request, "student/registration/register.html", {"form": form})
+    return render(request, "student/registration/register.html", {"form": form}) 
+
+
+def logoutt ( request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('login')

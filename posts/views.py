@@ -4,7 +4,7 @@ from django.views.generic import View
 from django.urls import reverse_lazy
 from .models import Poste
 from django.views.generic import ListView , CreateView ,UpdateView
-from .forms import  StageForm , RecommandationForm , TransportForm ,LogementForm,EvenClub,EvenSocialForm
+from .forms import  StageForm , RecommandationForm , TransportForm ,LogementForm,EvenClub,EvenSocialForm ,EvenClubForm
 
 
 
@@ -29,7 +29,7 @@ class CreerPostView(View):
             'transport': TransportForm,
             'recommandation': RecommandationForm,
             'logement': LogementForm,
-            'evenement_club': EvenClub,
+            'evenement_club': EvenClubForm,
             'evenement_social': EvenSocialForm
         }
         form_class = form_classes.get(form_type)
@@ -43,7 +43,7 @@ class CreerPostView(View):
             'transport': TransportForm,
             'recommandation': RecommandationForm,
             'logement': LogementForm,
-            'evenement_club': EvenClub,
+            'evenement_club': EvenClubForm,
             'evenement_social': EvenSocialForm
         }
         form_class = form_classes.get(form_type)

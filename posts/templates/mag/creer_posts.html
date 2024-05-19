@@ -1,70 +1,55 @@
 <!DOCTYPE html>
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
     <title>Créer le Post</title>
+    {% extends "student/base.html" %} {% block content %}
     <style>
+      
+
       /* Style du formulaire */
       form {
-        max-width: 400px;
+        max-width: 500px;
         margin: 0 auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-      }
+        padding: 30px;
+        border: 2px solid hsl(0, 0%, 100%);
+        border-radius: 10px;
+        background-color: rgb(60, 59, 59); 
+      } 
 
       /* Style des champs */
       form input[type="text"],
       form input[type="email"],
       form textarea {
         width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
+        padding: 12px;
+        margin-bottom: 20px;
+        border: 1px solid hsl(0, 0%, 100%);
         border-radius: 5px;
-        box-sizing: border-box; /* S'assure que la largeur inclut le padding */
+        box-sizing: border-box;
+        font-size: 16px;
+        background-color: transparent;
+        color: hsl(0, 0%, 100%);
+      }
+
+      /* Style des libellés */
+      form label {
+        color: hsl(0, 0%, 100%); /* Set label color to white */
       }
 
       /* Style du bouton */
-      form button {
-        background-color: #007bff;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
+      
 
       /* Style du bouton au survol */
-      form button:hover {
-        background-color: #0056b3;
-      }
-
-      /* Style du bouton au focus */
-      form button:focus {
-        outline: none;
-      }
-      /* Style pour le lien */
-      a {
-        color: #007bff;
-        text-decoration: none;
-      }
-      /* Style pour le lien au survol */
-      a:hover {
-        text-decoration: underline;
-      }
       
     </style>
   </head>
 
   <body>
     <form method="post" enctype="multipart/form-data">
-      {% csrf_token %} 
-      {{ form.as_p }}
+      {% csrf_token %} {{ form.as_p }}
       <button type="submit">Ajouter</button>
     </form>
+    {% endblock %}
   </body>
 </html>

@@ -5,12 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sélectionner un type de formulaire</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f7f7f7;
-        }
         h1 {
             text-align: center;
             margin-top: 50px;
@@ -19,7 +13,6 @@
         ul {
             list-style-type: none;
             padding: 0;
-            margin: 0 auto;
             max-width: 400px;
         }
         li {
@@ -36,17 +29,58 @@
         li a:hover {
             background-color: #f0f0f0;
         }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .popup {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
     </style>
 </head>
 <body>
     <h1>Sélectionner un type de post</h1>
-    <ul>
-        <li><a href="{% url 'creer_post' form_type='stage' %}">Formulaire de Stage</a></li>
-        <li><a href="{% url 'creer_post' form_type='transport' %}">Formulaire de Transport</a></li>
-        <li><a href="{% url 'creer_post' form_type='recommandation' %}">Formulaire de Recommandation</a></li>
-        <li><a href="{% url 'creer_post' form_type='logement' %}">Formulaire de Logement</a></li>
-        <li><a href="{% url 'creer_post' form_type='evenement_club' %}">Formulaire d'Événement Club</a></li>
-        <li><a href="{% url 'creer_post' form_type='evenement_social' %}">Formulaire d'Événement Social</a></li>
-    </ul>
+
+    <!-- Bouton pour ouvrir le pop-up -->
+    <button onclick="openPopup()">Afficher les formulaires</button>
+
+    <!-- Structure HTML pour le pop-up -->
+    <div class="overlay" id="overlay">
+        <div class="popup">
+            <h1>Liste des formulaires</h1>
+            <ul>
+                <li><a href="{% url 'creer_post' form_type='stage' %}">Formulaire de Stage</a></li>
+                <li><a href="{% url 'creer_post' form_type='transport' %}">Formulaire de Transport</a></li>
+                <li><a href="{% url 'creer_post' form_type='recommandation' %}">Formulaire de Recommandation</a></li>
+                <li><a href="{% url 'creer_post' form_type='logement' %}">Formulaire de Logement</a></li>
+                <li><a href="{% url 'creer_post' form_type='evenement_club' %}">Formulaire d'Événement Club</a></li>
+                <li><a href="{% url 'creer_post' form_type='evenement_social' %}">Formulaire d'Événement Social</a></li>
+            </ul>
+            <!-- Bouton pour fermer le pop-up -->
+            <button onclick="closePopup()">Fermer</button>
+        </div>
+    </div>
+
+    <script>
+        // Fonction pour afficher le pop-up
+        function openPopup() {
+            document.getElementById("overlay").style.display = "flex";
+        }
+
+        // Fonction pour fermer le pop-up
+        function closePopup() {
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
 </body>
 </html>

@@ -1,17 +1,4 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-<body>
-  <form method="post" action="{% url 'logout' %}">
-    {% csrf_token %}
-    <li>
-      <button type="submit" class="dropdown-item btn-link">Déconnexion</button>
-    </li>
-  </form>
-</body>
-</html>
-  
+
+<h2>Vous êtes déconnecté.</h2>
+<a href="{% url 'login' %}">Se reconnecter</a>
+

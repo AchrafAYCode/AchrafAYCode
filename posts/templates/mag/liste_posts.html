@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Afficher les Postes</title>
     <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=pt_774bf810863bba2e5c7da24f2dfed3"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     {% extends "student/base.html" %} {% block content %}
     <style>
-      /* Styles CSS */
+
       @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&family=Roboto:wght@500;700&display=swap");
 
       :root {
@@ -68,26 +69,21 @@
         cursor: default;
       }
 
-      .post-body-ajout a {
+      .post-body-ajout {
         font-size: 15px;
         font-weight: 500;
         color: var(--clr-text);
-        background: rgb(60, 59, 59); /* Ajoutez une couleur d'arrière-plan */
+        background: rgb(60, 59, 59); 
         box-shadow: 4px 4px 30px rgb(0, 0, 0);
         border-radius: 10px;
         padding: 16px 16px 0;
-        margin-bottom: 16px;
         font-size: "30px";
         height: auto;
         width: 600px;
-        color: white;
-        text-decoration: none;
-        display: flex; /* Modification du display en flex */
-        flex-direction: column; /* Ajout d'une direction de colonne */
+        display: flex; 
+        flex-direction: column; 
         align-items: center;
-        gap: 8px;
         padding: 15px 0;
-
       }
 
       .post-username {
@@ -96,9 +92,7 @@
         gap: 10px;
       }
 
-      .post-author {
-        font-size: 10px;
-      }
+      
 
       .post-avatar {
         width: 40px;
@@ -115,13 +109,13 @@
         white-space: nowrap;
       }
 
-      .post-author {
+      .post-author {  
         width: fit-content;
-        font-size: 0.8rem;
+        font-size: 17px;
         font-weight: 600;
-        opacity: 0.6;
         color: var(--clr-text);
       }
+
 
       .post-avatar {
         width: 40px;
@@ -130,20 +124,180 @@
         border-radius: 5px;
         cursor: pointer;
       }
-      .like {
-        color: white;
+      
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
       }
+      .popup {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .selectForm {
+        text-align: center; /* Centrer le contenu horizontalement */
+        margin-top: 50px; /* Espacement du haut */
+      }
+
+      .selectForm .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .selectForm .popup {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .selectForm h1 {
+        margin-bottom: 20px; /* Espacement sous le titre */
+        color: #333; /* Couleur du texte */
+      }
+
+      .selectForm ul {
+        list-style-type: none; /* Enlever les puces de liste */
+        padding: 0; /* Enlever le padding par défaut */
+        max-width: 400px; /* Largeur maximale de la liste */
+        margin: 0 auto; /* Centrer la liste horizontalement */
+      }
+
+      .selectForm li {
+        background-color: #f9f9f9; /* Couleur de fond des éléments de liste */
+        border-radius: 5px; /* Bord arrondi */
+        margin-bottom: 10px; /* Espacement entre les éléments de liste */
+      }
+
+      .selectForm li a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        color: #333; /* Couleur du texte des liens */
+      }
+
+      .selectForm li a:hover {
+        background-color: #e0e0e0; /* Couleur de fond au survol */
+      }
+
+      .selectForm .popup button {
+        margin-top: 20px; /* Espacement du haut du bouton */
+        padding: 10px 20px; /* Espacement intérieur du bouton */
+        background-color: #333; /* Couleur de fond du bouton */
+        color: #fff; /* Couleur du texte du bouton */
+        border: none; /* Enlever la bordure */
+        border-radius: 5px; /* Bord arrondi */
+        cursor: pointer; /* Curseur pointeur */
+      }
+
+      .post-body-ajout {
+        text-align: center; /* Centrer le bouton horizontalement */
+        margin-top: 60px; /* Espacement du haut */
+    }
+
+    .post-body-ajout button {
+        padding: 10px 20px; /* Espacement intérieur du bouton */
+        background-color: #4CAF50; /* Couleur de fond du bouton */
+        color: white; /* Couleur du texte */
+        border: none; /* Enlever la bordure */
+        border-radius: 5px; /* Bord arrondi */
+        cursor: pointer; /* Curseur pointeur */
+    }
+
+    .post-details a{
+      text-decoration: none;
+
+    }
+    .post-details p:hover{
+      text-decoration: white;
+      color: white;
+    }
+
+    .commentaire{
+      padding-left: 10px;
+      height: auto;
+      min-width: 580px;
+      max-width: 580px;
+      border-radius: 10px;
+      border-color: rgba(147, 146, 146, 0.652);
+      background-color: transparent ;
+     text-decoration: white;
+
+    }
     </style>
+    <script>
+      // Fonction pour afficher le pop-up
+      function openPopup() {
+        document.getElementById("overlay").style.display = "flex";
+      }
+
+      // Fonction pour fermer le pop-up
+      function closePopup() {
+        document.getElementById("overlay").style.display = "none";
+      }
+    </script>
   </head>
   <body>
-    <br /><br /><br /><br /><br />
-
     <div class="posts">
-        <div class="post-body-ajout">
-          <a href="{% url 'select_form' %}"> Ajouter une poste</a>
-        </div>
+      <div class="post-body-ajout">
+        <button onclick="openPopup()">Ajouter une poste</button>
+      </div>
     </div>
-
+    <div class="selectForm">
+      <div class="overlay" id="overlay">
+        <div class="popup">
+          <h1>Liste des formulaires</h1>
+          <ul>
+            <li>
+              <a href="{% url 'creer_post' form_type='stage' %}"
+                >Formulaire de Stage</a
+              >
+            </li>
+            <li>
+              <a href="{% url 'creer_post' form_type='transport' %}"
+                >Formulaire de Transport</a
+              >
+            </li>
+            <li>
+              <a href="{% url 'creer_post' form_type='recommandation' %}"
+                >Formulaire de Recommandation</a
+              >
+            </li>
+            <li>
+              <a href="{% url 'creer_post' form_type='logement' %}"
+                >Formulaire de Logement</a
+              >
+            </li>
+            <li>
+              <a href="{% url 'creer_post' form_type='evenement_club' %}"
+                >Formulaire d'Événement Club</a
+              >
+            </li>
+            <li>
+              <a href="{% url 'creer_post' form_type='evenement_social' %}">Formulaire d'Événement Social</a>
+            </li>
+          </ul>
+          <button onclick="closePopup()">Fermer</button>
+        </div>
+      </div>
+    </div>
+    
     <div class="posts">
       <div class="post-container">
         {% for poste in posts %}
@@ -163,7 +317,8 @@
               {% endif %} {% if poste.logement %}
 
               <div>
-                <strong>Localisation:</strong> {{poste.logement.localisation}}<br />
+                <strong>Localisation:</strong>
+                {{poste.logement.localisation}}<br />
                 <strong>Description:</strong> {{ poste.logement.description}}<br />
                 <strong>Contact:</strong> {{ poste.logement.contactinfo }}<br />
               </div>
@@ -171,9 +326,12 @@
 
               <div>
                 <strong>Départ:</strong> {{ poste.transport.depart }}<br />
-                <strong>Destination:</strong> {{poste.transport.destination}}<br />
-                <strong>Heure de départ:</strong> {{poste.transport.heure_dep}}<br />
-                <strong>Nombre de sièges:</strong> {{poste.transport.nbre_sièges}}<br />
+                <strong>Destination:</strong>
+                {{poste.transport.destination}}<br />
+                <strong>Heure de départ:</strong>
+                {{poste.transport.heure_dep}}<br />
+                <strong>Nombre de sièges:</strong>
+                {{poste.transport.nbre_sièges}}<br />
                 <strong>Contact:</strong> {{ poste.transport.contactinfo }}<br />
               </div>
               {% elif poste.stage %}
@@ -195,7 +353,8 @@
               <div>
                 <strong>Club:</strong> {{ poste.evenement.evenclub.club }}<br />
                 <strong>Intitulé:</strong> {{ poste.evenement.intitulé }}<br />
-                <strong>Description:</strong> {{poste.evenement.description}}<br />
+                <strong>Description:</strong>
+                {{poste.evenement.description}}<br />
                 <strong>Lieu:</strong> {{ poste.evenement.lieu }}<br />
                 <strong>Contact:</strong> {{ poste.evenement.contactInfo }}<br />
               </div>
@@ -203,7 +362,8 @@
 
               <div>
                 <strong>Intitulé:</strong> {{ poste.evenement.intitulé }}<br />
-                <strong>Description:</strong> {{poste.evenement.description}}<br />
+                <strong>Description:</strong>
+                {{poste.evenement.description}}<br />
                 <strong>Lieu:</strong> {{ poste.evenement.lieu }}<br />
                 <strong>Contact:</strong> {{ poste.evenement.contactInfo }}<br />
                 <strong>Prix:</strong> {{ poste.evenement.evensocial.prix }}<br />
@@ -218,8 +378,9 @@
                   src="https://img.freepik.com/vecteurs-premium/illustration-vectorielle-plate-echelle-gris-avatar-profil-utilisateur-icone-personne-image-profil-silhouette-neutre-genre-convient-pour-profils-medias-sociaux-icones-economiseurs-ecran-comme-modelex9xa_719432-879.jpg"
                 />
                 <div class="post-details">
-                  <h2 class="post-name">{{poste.title}}</h2>
-                  <p class="post-author">Posted By : {{poste.user}}</p>
+                  <a href="{% url 'user_profile' user_id=poste.user.id %}"
+                    ><p class="post-author">Posted By : {{poste.user}}</p></a
+                  >
                 </div>
                 <div
                   data-lyket-type="like"
@@ -229,6 +390,10 @@
                 ></div>
               </div>
             </div>
+          </div>
+
+          <div >
+            <textarea class="commentaire" placeholder="Leave a comment here" ></textarea>
           </div>
         </div>
         {% endfor %}

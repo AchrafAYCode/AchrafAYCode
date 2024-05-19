@@ -6,4 +6,4 @@ from django.contrib.auth.decorators import login_required
 
 def index (request):
     context={'val':"Menu Acceuil"}
-    return render(request,'student/acceuils.html',context)
+    return render(request,'student/acceuils.html')
