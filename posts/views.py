@@ -64,7 +64,7 @@ class ListPostStage(ListView):
     
     
     
-class ListPostTra(CreateView):
+class ListPostTra(ListView):
     model = Poste 
     template_name = 'listPosts/list_transport.html'
     form_class =  TransportForm
@@ -74,7 +74,7 @@ class ListPostTra(CreateView):
     
     
     
-class ListPostRecommandation(CreateView):
+class ListPostRecommandation(ListView):
     model = Poste 
     template_name = 'listPosts/list_recommandation.html'
     form_class =  RecommandationForm
@@ -82,7 +82,7 @@ class ListPostRecommandation(CreateView):
     
     
     
-class ListPostLogement(CreateView):
+class ListPostLogement(ListView):
     model = Poste 
     template_name = 'listPosts/liste_logement.html'
     form_class =  LogementForm
@@ -90,13 +90,12 @@ class ListPostLogement(CreateView):
     
     
 
-class ListPostEvenementClub(CreateView):
+class ListPostEvenementClub(ListView):
     model = Poste 
     template_name = 'listPosts/list_evenementClub.html'
-    form_class =  EvenClub
-    context_object_name = 'list_evenementClub' 
+    context_object_name = 'list_evenementClub'
     
-class ListEvenementSocial(CreateView):
+class ListEvenementSocial(ListView):
     model = Poste 
     template_name = 'listPosts/list_evenementSocial.html'
     form_class =  EvenSocialForm

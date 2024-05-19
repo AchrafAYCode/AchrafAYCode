@@ -1,123 +1,175 @@
 <!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Afficher les Postes</title>
-    {% extends "student/base.html" %} {% block content %}
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&family=Roboto:wght@500;700&display=swap"
-    />
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="fonts/icomoon/style.css" />
+    <link rel="stylesheet" href="css/owl.carousel.min.css" />
+    {% extends "student/base.html" %}
+    {% block content %}
     <style>
-      /* Styles CSS */
-      :root {
-        --clr-text: hsl(0, 0%, 100%);
-      }
-
-      * {
-        box-sizing: border-box;
-        padding: 0;
-        margin: 0;
-        font-family: "Quicksand", sans-serif;
-      }
-
-      .posts {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: rgb(0, 0, 0);
-      }
-
-      .post-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-      }
-
-      .post {
-        font-size: 15px;
-        font-weight: 500;
-        color: var(--clr-text);
-        background: rgb(60, 59, 59);
-        box-shadow: 4px 4px 30px rgb(0, 0, 0);
-        border-radius: 10px;
-        padding: 16px 16px 0;
-        margin-bottom: 16px;
-        width: 600px; /* Ajout de la largeur */
-      }
-
-      .post-img {
-        max-width: 100%; /* Changement de la largeur maximale */
-        height: auto; /* Ajout pour conserver le ratio */
-        border-radius: 6px;
-        user-select: none;
-        pointer-events: none;
-      }
-
-      .post-body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        padding: 15px 0;
-        cursor: default;
-      }
-
-      .post-name {
-        font-size: 1.1rem;
-        font-weight: 600;
-        margin-bottom: 8px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      .post-username {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .post-author {
-        font-size: 10px;
-      }
-
-      .post-avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-      }
+        /* Your CSS styles here */
+        p {
+            color: #b3b3b3;
+            font-weight: 300;
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+            font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+        .content {
+            padding: 100px 25%;
+        }
+        h2 {
+            font-size: 20px;
+            color: #fff;
+        }
+        .custom-table {
+            height: 600px;
+            width: 1000px;
+        }
+        .custom-table thead tr, .custom-table thead th {
+            border-top: none;
+            border-bottom: none !important;
+            color: #fff;
+        }
+        .custom-table tbody th, .custom-table tbody td {
+            color: #ffffff;
+            font-weight: 400;
+            padding-bottom: 20px;
+            padding-top: 20px;
+            font-weight: 300;
+            text-align: center;
+        }
+        .custom-table tbody th small, .custom-table tbody td small {
+            color: #b3b3b3;
+            font-weight: 300;
+        }
+        .custom-table tbody tr:not(.spacer) {
+            border-radius: 7px;
+            overflow: hidden;
+            -webkit-transition: 0.3s all ease;
+            -o-transition: 0.3s all ease;
+            transition: 0.3s all ease;
+        }
+        .custom-table tbody tr:not(.spacer):hover {
+            -webkit-box-shadow: 0 2px 10px -5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px -5px rgba(0, 0, 0, 0.1);
+        }
+        .custom-table tbody tr th, .custom-table tbody tr td {
+            background: #25252b;
+            border: none;
+            -webkit-transition: 0.3s all ease;
+            -o-transition: 0.3s all ease;
+            transition: 0.3s all ease;
+        }
+        .custom-table tbody tr th a, .custom-table tbody tr td a {
+            color: #b3b3b3;
+        }
+        .custom-table tbody tr th:first-child, .custom-table tbody tr td:first-child {
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+        }
+        .custom-table tbody tr th:last-child, .custom-table tbody tr td:last-child {
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }
+        .custom-table tbody tr.spacer td {
+            padding: 0 !important;
+            height: 3px;
+            border-radius: 0 !important;
+            background: transparent !important;
+        }
+        .custom-table tbody tr.active th, .custom-table tbody tr.active td, .custom-table tbody tr:hover th, .custom-table tbody tr:hover td {
+            color: #fff;
+            background: #2e2e36;
+        }
+        .custom-table tbody tr.active th a, .custom-table tbody tr.active td a, .custom-table tbody tr:hover th a, .custom-table tbody tr:hover td a {
+            color: #fff;
+        }
+        .control {
+            display: block;
+            position: relative;
+            margin-bottom: 25px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .control input {
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+        }
+        .button-24 {
+            background: #ff4742;
+            border: 1px solid #ff4742;
+            border-radius: 6px;
+            box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+            box-sizing: border-box;
+            color: #ffffff;
+            cursor: pointer;
+            display: inline-block;
+            font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 16px;
+            min-height: 40px;
+            outline: 0;
+            padding: 12px 14px;
+            text-align: center;
+            text-rendering: geometricprecision;
+            text-transform: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: middle;
+        }
+        .button-24:hover, .button-24:active {
+            background-color: initial;
+            background-position: 0 0;
+            color: #ff4742;
+        }
+        .button-24:active {
+            opacity: 0.5;
+        }
     </style>
-  </head>
-  <body>
-    <div class="posts">
-      <div class="post-container">
-        {% for poste in list_evenementClub %}
-        <div class="post">
-          <div class="post-body">
-            <img class="post-img" src="/media/{{poste.image}}" alt="recipe" />
-            <div class="post-detail">intitulé: {{ poste.EvenClub.intitulé }}</div>
-            <div class="post-detail">description: {{ poste.EvenClub.description }}</div>
-            <div class="post-detail">lieu: {{ poste.EvenClub.lieu }} </div>
-            <div class="post-detail">Club: {{ poste.EvenClub.sujet }}</div>
-            <div class="post-detail">Contact: {{ poste.EvenClub.contactinfo }}</div>
-            <div class="post-username">
-              <img
-                class="post-avatar"
-                src="https://img.freepik.com/vecteurs-premium/illustration-vectorielle-plate-echelle-gris-avatar-profil-utilisateur-icone-personne-image-profil-silhouette-neutre-genre-convient-pour-profils-medias-sociaux-icones-economiseurs-ecran-comme-modelex9xa_719432-879.jpg"
-              />
-              <div>
-                <h2 class="post-name">Homemade Ice Cream</h2>
-                <p class="post-author">Posted By: {{ poste.user }}</p>
-              </div>
+</head>
+<body>
+    <div class="content">
+        <div class="container">
+            <h2 class="mb-5" style="text-align: center;">Liste de stages</h2>
+            <div class="table-responsive custom-table-responsive">
+                <table class="table custom-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Utilisateur</th>
+                            <th scope="col">Intitulé</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Lieu</th>
+                            <th scope="col">Club</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for poste in list_evenementClub %}
+                        <tr scope="row">
+                            <td>{{ poste.user.username }}</td>
+                            <td>{{ poste.evenclub.Intitulé }}</td>
+                            <td>{{ poste.evenclub.Description }}</td>
+                            <td>{{ poste.evenclub.Lieu }}</td>
+                            <td>{{ poste.evenclub.Club }}</td>
+                            <td>{{ poste.evenclub.contactinfo }}</td>
+                            <td>
+                                <button class="button-24" role="button">Supprimer</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
-          </div>
         </div>
-        {% endfor %}
-      </div>
     </div>
     {% endblock %}
-  </body>
+</body>
 </html>

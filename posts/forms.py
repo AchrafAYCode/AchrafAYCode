@@ -32,7 +32,7 @@ class RecommandationForm(forms.ModelForm):
 class EvenClubForm(forms.ModelForm):
     class Meta:
         model = EvenClub
-        fields = "__all__" 
+        fields = "__all__"
         
         
 class EvenSocialForm(forms.ModelForm):

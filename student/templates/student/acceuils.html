@@ -4,9 +4,137 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    {% extends 'student/base.html' %} {% block content %}
+    {% extends 'student/base.html' %}
+    {% block content %}
+    <style>
+     .animate-four{
+      align-items: center;
+     }
+
+      p {
+        margin: 0 0 10px;
+      }
+      .container {
+        width: 100%;
+        margin: auto;
+        font-weight: 900;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 0 0 200px;
+      }
+
+     
+
+      .animate {
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 50px;
+        margin: 100px 0 0;
+        align-items: center;
+      }
+
+      .animate span:nth-of-type(2) {
+        animation-delay: 0.05s;
+      }
+      .animate span:nth-of-type(3) {
+        animation-delay: 0.1s;
+      }
+      .animate span:nth-of-type(4) {
+        animation-delay: 0.15s;
+      }
+      .animate span:nth-of-type(5) {
+        animation-delay: 0.2s;
+      }
+      .animate span:nth-of-type(6) {
+        animation-delay: 0.25s;
+      }
+      .animate span:nth-of-type(7) {
+        animation-delay: 0.3s;
+      }
+      .animate span:nth-of-type(8) {
+        animation-delay: 0.35s;
+      }
+      .animate span:nth-of-type(9) {
+        animation-delay: 0.4s;
+      }
+      .animate span:nth-of-type(10) {
+        animation-delay: 0.45s;
+      }
+      .animate span:nth-of-type(11) {
+        animation-delay: 0.5s;
+      }
+      .animate span:nth-of-type(12) {
+        animation-delay: 0.55s;
+      }
+      .animate span:nth-of-type(13) {
+        animation-delay: 0.6s;
+      }
+      .animate span:nth-of-type(14) {
+        animation-delay: 0.65s;
+      }
+      .animate span:nth-of-type(15) {
+        animation-delay: 0.7s;
+      }
+      .animate span:nth-of-type(16) {
+        animation-delay: 0.75s;
+      }
+      .animate span:nth-of-type(17) {
+        animation-delay: 0.8s;
+      }
+      .animate span:nth-of-type(18) {
+        animation-delay: 0.85s;
+      }
+      .animate span:nth-of-type(19) {
+        animation-delay: 0.9s;
+      }
+      .animate span:nth-of-type(20) {
+        animation-delay: 0.95s;
+      }
+
+      /* Animation */
+
+      .four span {
+        color: #ffffff;
+        opacity: 0;
+        transform: translate(0, -100px) rotate(360deg) scale(0);
+        animation: revolveDrop 2s infinite;
+      }
+
+      @keyframes revolveDrop {
+        30% {
+          transform: translate(0, -50px) rotate(180deg) scale(1);
+        }
+
+        60% {
+          transform: translate(0, 20px) scale(0.8) rotate(0deg);
+        }
+
+        100% {
+          transform: translate(0) scale(1) rotate(0deg);
+          opacity: 1;
+        }
+      }
+    </style>
   </head>
   <body>
+    <div class="animate four">
+      <span>B</span><span>I</span><span>E</span><span>N</span><span>V</span><span>E</span><span>N</span><span>U</span><span>E</span> 
+      &nbsp;<span>A</span> &nbsp;
+      <span>S</span><span>T</span><span>U</span><span>D</span><span>E</span><span>N</span><span>T</span>&nbsp; <span>H</span><span>E</span><span>L</span><span>P</span>
+    </div>
     {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(function () {
+        $(".repeat").click(function (e) {
+          e.preventDefault();
+          var classes = $(this).siblings(".animate").attr("class");
+          $(this).siblings(".animate").attr("class", "animate");
+          var indicator = $(this);
+          setTimeout(function () {
+            $(indicator).siblings(".animate").addClass(classes);
+          }, 20);
+        });
+      });
+    </script>
   </body>
 </html>
